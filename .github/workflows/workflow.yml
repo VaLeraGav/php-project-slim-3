@@ -1,0 +1,40 @@
+name: linter and tests
+
+on:
+  push:
+    branches:
+      [ main ]
+  pull_request:
+    branches:
+      [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: PHP Security Checker
+        uses: StephaneBour/actions-php-security-checker@1.1
+
+      - name: Install
+        run: make setup
+
+      - name: Check lint
+        run: make lint
+
+      - name: Execute tests via PHPUnit
+        run: make test
+
+#      - name: Run test & publish code coverage
+#        uses: paambaati/codeclimate-action@v2.6.0
+#        env:
+#          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+#        with:
+#          coverageCommand: make test-coverage
+#          coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
+#          debug: true

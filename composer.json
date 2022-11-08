@@ -1,0 +1,12 @@
+{
+    "name": "halon/php-project-slim-3",
+    "authors": [
+        {
+            "name": "VaLeraGav",
+            "email": "deliciiouss@yandex.ru"
+        }
+    ],
+    "require": {
+        "slim/php-view": "^3.2"
+    }
+}
