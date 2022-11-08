@@ -1,13 +1,24 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-hi
-</body>
-</html>
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+use DI\Container;
+use Slim\Factory\AppFactory;
+
+$container = new Container();
+$container->set('renderer', function () {
+    return new \Slim\Views\PhpRenderer(__DIR__ . '/../templates');
+});
+
+$app = AppFactory::createFromContainer($container);
+$app->addErrorMiddleware(true, true, true);
+
+$app->get('/', function ($request, $response) {
+    return $this->get('renderer')->render($response, 'index.phtml');
+})->setName('main');
+
+
+
+
+
+$app->run();
