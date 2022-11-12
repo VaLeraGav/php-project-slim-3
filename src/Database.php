@@ -8,6 +8,8 @@ class Database
 {
     public PDO $dbh;
 
+    // jdbc:postgresql://localhost:5432/postgres
+
     public function __construct()
     {
         $dbUrl = getenv('DATABASE_URL');

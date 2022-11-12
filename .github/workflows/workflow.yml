@@ -24,5 +24,5 @@ jobs:
 #      - name: Check lint
 #        run: make lint
 
-      - name: Execute tests via PHPUnit
-        run: make test
+#      - name: Execute tests via PHPUnit
+#        run: make test
