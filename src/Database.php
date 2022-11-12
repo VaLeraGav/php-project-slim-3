@@ -14,6 +14,5 @@ class Database
         if ($dbUrl) {
             throw new \Exception('error: DATABASE_URL');
         }
-
     }
 }

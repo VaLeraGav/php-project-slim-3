@@ -56,6 +56,24 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-invoker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fig" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nikic" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-di" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/squizlabs" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theseer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twbs" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vlucas" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

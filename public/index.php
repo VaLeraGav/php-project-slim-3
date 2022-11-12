@@ -25,7 +25,9 @@ $app->add(MethodOverrideMiddleware::class);
 
 $app->get('/', function ($request, $response) {
     $params = [
-        'url' => ['name' => ''],
+        'url' => [
+            'name' => ''
+        ],
         'errors' => []
     ];
     return $this->get('renderer')->render($response, 'index.phtml', $params);
@@ -39,9 +41,7 @@ $app->get('/urls', function ($request, $response) {
 
 
 $app->post('/urls', function ($request, $response) {
-
-
-    return $this->get('renderer')->withRedirect('/urls', 302);;
+    return $this->get('renderer')->withRedirect('/urls', 302);
 });
 
 $app->run();
