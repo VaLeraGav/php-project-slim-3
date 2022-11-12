@@ -12,9 +12,15 @@ class Database
 
     public function __construct()
     {
-        $dbUrl = getenv('DATABASE_URL');
-        if ($dbUrl) {
-            throw new \Exception('error: DATABASE_URL');
+        try {
+            $pdo = new PDO("sqlite:identifier.sqlite");
+
+            if ($pdo) {
+                echo "Connected to the $db database successfully!";
+            }
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
         }
+
     }
 }

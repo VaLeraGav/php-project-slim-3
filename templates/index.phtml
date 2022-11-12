@@ -10,6 +10,15 @@ include('templates/header.phtml') ?>
 
 <!--@include('flash::message')-->
 
+    <ul>
+        <?php foreach ($flash as $messages): ?>
+            <?php foreach ($messages as $message): ?>
+                <li><?= $message ?></li>
+            <?php endforeach ?>
+        <?php endforeach ?>
+    </ul>
+
+
 <main class="flex-grow-1">
 
     <div class="container-lg mt-3">
@@ -21,14 +30,25 @@ include('templates/header.phtml') ?>
                     <div class="col-8">
                         <?php
                         if (empty($errors)) : ?>
-                        <input type="text" name="url[name]" value="<?= $url['name'] ?>"
-                               class="form-control form-control-lg"
-                               placeholder="https://www.example.com">
+
+                            <input type="text" name="url[name]" value="<?= $url['name'] ?>"
+                                   class="form-control form-control-lg"
+                                   placeholder="https://www.example.com">
+
+                        <?php else: ?>
+
+                            <input type="text" name="url[name]" value="<?= $url['name'] ?>"
+                                   class="form-control form-control-lg"
+                                   placeholder="https://www.example.com">
+                            <ul>
+                                <?php foreach ($errors as $error): ?>
+
+                                    <li><?= $error ?></li>
+
+                                <?php endforeach ?>
+                            </ul>
                         <?php
                         endif ?>
-                        <?php foreach ($errors as $error): ?>
-                        <div><?= $error ?></div>
-                        <?php endforeach ?>
 
                     </div>
                     <div class="col-2">
@@ -44,4 +64,4 @@ include('templates/header.phtml') ?>
 </main>
 
 <?php
-include ('templates/footer.phtml') ?>
+include('templates/footer.phtml') ?>
