@@ -10,6 +10,13 @@ include('templates/head.phtml') ?>
 include('templates/header.phtml') ?>
 
 <!--@include('flash::message')-->
+<?php if (isset($flash['success1'])) : ?>
+    <?php foreach ($flash['success1'] as $message) : ?>
+        <div class="alert alert-success" role="alert">
+            <?= $message ?>
+        </div>
+    <?php endforeach ?>
+<?php endif ?>
 
 <main class="flex-grow-1">
 

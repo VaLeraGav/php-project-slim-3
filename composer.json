@@ -16,7 +16,9 @@
         "vlucas/valitron": "^1.4",
         "slim/flash": "^0.4.0",
         "phpunit/phpunit": "^9.5",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "nesbot/carbon": "^2.63"
+
     },
     "autoload": {
         "psr-4": {

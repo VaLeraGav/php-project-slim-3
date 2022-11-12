@@ -2,17 +2,21 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use App\Database;
 use DI\Container;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\MethodOverrideMiddleware;
 
-function d($variable) {
+function d($variable)
+{
     echo '<pre>';
     print_r($variable);
     echo '</pre>';
 }
 
-if (session_status() == PHP_SESSION_NONE) session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 $container = new Container();
 
@@ -29,7 +33,7 @@ $app->add(MethodOverrideMiddleware::class);
 
 
 $app->get('/', function ($request, $response) {
-   // $flash = $this->get('flash')->getMessages();
+    // $flash = $this->get('flash')->getMessages();
     $params = [
         'url' => [
             'name' => ''
@@ -41,7 +45,6 @@ $app->get('/', function ($request, $response) {
 });
 
 $app->post('/urls', function ($request, $response) {
-
     $url = $request->getParsedBodyParam('url');
     $urlName = htmlspecialchars($url['name']);
     $validator = new Valitron\Validator(['totalNameUrl' => $urlName]);
@@ -51,27 +54,58 @@ $app->post('/urls', function ($request, $response) {
     $validator->validate();
 
     $errors = $validator->errors();
+    // не забыть убрать !
     if (is_array($errors)) {
-
         $params = [
             'url' => [
                 'name' => $urlName
             ],
             'errors' => $errors['totalNameUrl']
         ];
-        // $this->get('flash')->addMessage('success', 'error has occurred');
+        $this->get('flash')->addMessage('success', 'Некорректный URL');
         return $this->get('renderer')->render($response, 'index.phtml', $params);
     }
 
-   // $urlData = parse_url($formData['name']);
-    // $normalizedUrl = strtolower("{$urlData['scheme']}://{$urlData['host']}");
+    $urlData = parse_url($urlName);
+    $normalizedUrl = strtolower("{$urlData['scheme']}://{$urlData['host']}");
+    d($normalizedUrl);
+    $url = new Database();
+    $isUnique = $url->isUrlUnique($normalizedUrl);
 
-    return $this->get('renderer')->withRedirect('/urls', 302);
+    if ($isUnique) {
+        echo "уже существует";
+        $id = $isUnique['id'];
+        $this->get('flash')->addMessage('success', 'Страница уже существует');
+    } else {
+        echo "добавлена";
+//        $url->save($normalizedUrl);
+//        $id = $url->isUrlUnique($normalizedUrl);
+
+        $this->get('flash')->addMessage('success', 'Страница успешно добавлена');
+    }
+
+    return $this->get('renderer')->withRedirect("/urls/{$id}", 302);
+});
+
+$app->get('/urls/{id}', function ($request, $response, array $args) {
+    $flash = $this->get('flash')->getMessages();
+
+    $params = [
+//       'url' => $url,
+        'flash' => $flash
+    ];
+    return $this->get('renderer')->render($response, 'show.phtml', $params);
 });
 
 $app->get('/urls', function ($request, $response) {
-    $params = [];
+    $flash = $this->get('flash')->getMessages();
+
+    $params = [
+        // 'urls' => $urls
+        'flash' => $flash
+    ];
     return $this->get('renderer')->render($response, 'show.phtml', $params);
-})->setName('urls');
+});
+
 
 $app->run();
